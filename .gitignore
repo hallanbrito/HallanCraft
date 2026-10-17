@@ -1,0 +1,9 @@
+node_modules/
+.venv/
+__pycache__/
+*.log
+*.tar.gz
+*.mcpack
+*.mcaddon
+exports/backups/
+build/

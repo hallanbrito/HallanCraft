@@ -7,3 +7,12 @@ __pycache__/
 *.mcaddon
 exports/backups/
 build/
+
+# Credenciais e configuracoes privadas
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Referencias ainda nao auditadas
+referencias/

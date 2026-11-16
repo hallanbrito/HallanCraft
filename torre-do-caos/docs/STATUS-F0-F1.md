@@ -52,7 +52,7 @@ PASS: Java storage sources compiled with javac 21
 - Comandos em `plugin.yml`: `/torre admin exportarena <id>` e `/torre admin verificarena <id>`.
 - Snapshot versão F1.2: mundo UUID, região, blocos e hash SHA-256; CREATE_NEW proíbe sobrescrita pelo plugin.
 - Região exportada fica protegida; nenhuma wave, construção temporária ou reset automático habilitados.
-- Teste local puro Java 21 do blueprint: 6/6 verificações aprovadas. JUnit/MockBukkit e build completo ainda exigem confirmação em CI/Paper.
+- Teste local puro Java 21 do blueprint: 6/6 verificações aprovadas. **CI #43960719816: `gradle test` e `gradle jar` passaram**. Testes do plugin dentro do Paper continuam pendentes.
 - Limite: região de até 20 mil blocos; recusa block entities, não força chunks descarregados.
 - Documentação operacional em `docs/F1-2-BLUEPRINT.md`.
 - **Nenhum deploy e nenhum merge. Servidor do José permanece intocado.**

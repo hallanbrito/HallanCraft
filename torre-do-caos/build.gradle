@@ -1,0 +1,26 @@
+plugins { id 'java' }
+group = 'br.com.hallancraft'
+version = '0.1.0-SNAPSHOT'
+def paperVersion = '1.21.4-R0.1-SNAPSHOT'
+repositories {
+    mavenCentral()
+    maven { name = 'papermc'; url = uri('https://repo.papermc.io/repository/maven-public/') }
+}
+java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+dependencies {
+    compileOnly "io.papermc.paper:paper-api:${paperVersion}"
+    testImplementation "io.papermc.paper:paper-api:${paperVersion}"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.xerial:sqlite-jdbc:3.49.1.0'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.21:3.107.0'
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+test {
+    useJUnitPlatform()
+    testLogging { events 'passed', 'skipped', 'failed'; exceptionFormat 'full' }
+}
+jar { archiveBaseName = 'TorreDoCaos' }

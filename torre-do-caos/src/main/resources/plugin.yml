@@ -1,16 +1,15 @@
 name: TorreDoCaos
 main: br.com.hallancraft.torredocaos.TorreDoCaosPlugin
-version: 0.1.0-SNAPSHOT
+version: 0.1.2-PREVIEW
 api-version: '1.21.4'
-description: HallanCraft Torre do Caos - F1.2 blueprint admin, no gameplay
+description: Torre do Caos - tres mundos vazios, lobby e arenas isoladas (sem gameplay)
 load: POSTWORLD
 author: HallanCraft
 commands:
   torre:
-    description: Administrar blueprints F1.2
-    usage: /torre admin <exportarena|verificarena> <id>
-    permission: torredocaos.admin
+    description: Lobby, arena de previa e administracao de blueprints
+    usage: /torre <jogar|lobby|status|admin>
 permissions:
   torredocaos.admin:
-    description: Exportar e verificar arenas
+    description: Exportar e verificar blueprints
     default: op

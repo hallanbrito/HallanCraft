@@ -1,0 +1,7 @@
+name: TorreDoCaos
+main: br.com.hallancraft.torredocaos.TorreDoCaosPlugin
+version: 0.1.0-SNAPSHOT
+api-version: '1.21.4'
+description: HallanCraft Torre do Caos - foundation F0/F1.1, not gameplay ready
+load: POSTWORLD
+author: HallanCraft

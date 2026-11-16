@@ -46,13 +46,21 @@ PASS: Java storage sources compiled with javac 21
 
 **Sem deploy. Servidor do José intocado.**
 
-## F1.2 — Blueprint das Arenas (16/11/2026)
 
-- Implementado na branch: `ArenaBounds`, `ArenaBlueprint`, `ArenaBlueprintStore`, `ArenaBlueprintService`, `ArenaAdminCommand` e `ArenaProtectionListener`.
-- Comandos em `plugin.yml`: `/torre admin exportarena <id>` e `/torre admin verificarena <id>`.
-- Snapshot versão F1.2: mundo UUID, região, blocos e hash SHA-256; CREATE_NEW proíbe sobrescrita pelo plugin.
-- Região exportada fica protegida; nenhuma wave, construção temporária ou reset automático habilitados.
-- Teste local puro Java 21 do blueprint: 6/6 verificações aprovadas. **CI #43960719816: `gradle test` e `gradle jar` passaram**. Testes do plugin dentro do Paper continuam pendentes.
-- Limite: região de até 20 mil blocos; recusa block entities, não força chunks descarregados.
-- Documentação operacional em `docs/F1-2-BLUEPRINT.md`.
-- **Nenhum deploy e nenhum merge. Servidor do José permanece intocado.**
+## F1.2 — Arena Blueprint (16/11/2026)
+
+- Implementados: `ArenaBounds`, `ArenaBlueprint`, `ArenaBlueprintStore`, `ArenaBlueprintService`, `ArenaAdminCommand`, `ArenaProtectionListener`.
+- Novo comando administrativo: `/torre admin exportarena <id>` e `/torre admin verificarena <id>`; requer config de arena e permissão.
+- Snapshot imutável por política (`CREATE_NEW`), versão, SHA-256 e verificação; não há restauração de mundo em F1.2.
+- Proteção de área exportada; gameplay continua desabilitado.
+- Validação feita aqui: `scripts/verify-blueprint-offline.sh` — 6/6 checks com Java 21.
+- CI #43960719816: `gradle test` e `gradle jar` concluídos com sucesso no GitHub. Pendente: teste dos comandos e eventos dentro de um servidor Paper real. **Não homologado para deploy.**
+
+## F1.2.2 — 3 mundos void, lobby e 12 torres
+
+- Construção e proteção do mundo feitas pelo Paper ao carregar o plugin; sem `world.zip` ou ferramentas locais.
+- Mundo dedicado ao lobby + quatro slots em cada uma das três dimensões; jogador novo entra no lobby.
+- Alocação segura, sem duas pessoas na mesma arena, com capacidade inicial de 12 slots **de prévia**, não de combate.
+- Blueprints por arena gerados sem sobrescrita, com read-back e checksum; marker de propriedade dos mundos.
+- **Pendente:** teste no Paper real, CI da branch, testes de reinício/crash, medição de memória e homologação PO. F1.3–F1.6 não implementadas.
+- **Risco pendente:** SQLite V001 suporta apenas uma run. Multirun persistente requer V002 antes de gameplay simultâneo.

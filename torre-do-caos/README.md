@@ -56,9 +56,17 @@ Essas verificações não substituem `gradlew test`, Paper real ou testes de fal
 
 Veja `docs/STATUS-F0-F1.md` e `docs/PLANO-EXECUCAO.md`.
 
-## F1.2 — Blueprint de Arena (experimental)
 
-A Torre tem agora um exportador/verificador de arenas, sem gameplay. Configure `arenas`
-em `config.yml` e use os comandos administrativos a partir do console.
-Detalhes e restrições em [F1-2-BLUEPRINT.md](docs/F1-2-BLUEPRINT.md).
-A implementação da construção de barricadas e do reset seguro será F1.3/F1.4.
+## F1.2 — Blueprint das arenas (experimental)
+
+O comando de administração e a proteção de arena estão no módulo de laboratório.
+Configure `arenas` em `config.yml` e consulte [F1-2-BLUEPRINT.md](docs/F1-2-BLUEPRINT.md).
+O gameplay continua explicitamente desativado. Teste offline: `bash scripts/verify-blueprint-offline.sh`.
+
+## F1.2.2 — Lobby e 3 dimensões vazias (prévia sem combate)
+
+Esta revisão cria automaticamente **3 mundos separados** (`torre_overworld`, `torre_nether`, `torre_end`) com **12 torres isoladas** e um lobby quando o plugin inicia em um servidor novo. Nenhum mundo existente é apagado.
+
+Novos jogadores chegam ao lobby. Comandos: `/torre jogar`, `/torre lobby`, `/torre status`. A reserva da arena é exclusiva e temporária: **sem hordas, waves, reset de construção, níveis reais, moeda ou progresso persistente**. Isso será feito em fases posteriores, após migrar o SQLite para várias partidas simultâneas.
+
+Para instalar sem compilar no PC e ver restrições do servidor, consulte [F1-2-2-TRES-MUNDOS.md](docs/F1-2-2-TRES-MUNDOS.md).

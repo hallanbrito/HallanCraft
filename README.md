@@ -121,3 +121,12 @@ A prioridade imediata é **homologar no Galaxy A54 as correções arquitetônica
 Este é um projeto independente, **não oficial e não afiliado à Mojang ou à Microsoft**. *Minecraft* e marcas relacionadas pertencem aos seus respectivos titulares. Recursos e homenagens temáticas devem respeitar direitos autorais e utilizar conteúdo próprio ou devidamente licenciado.
 
 **Licença do código e dos ativos:** ainda não definida. A disponibilização pública deste repositório, por si só, não constitui concessão de licença para reutilização.
+
+## 🏰 Torre do Caos — modo roguelite Paper
+
+O **Torre do Caos** é um segundo servidor Minecraft **independente**, desenvolvido em Java 21 com Paper. Seu objetivo é um roguelite com waves, fortificações, loot, builds e reinício de runs. **Não faz parte do servidor familiar Bedrock** e não altera suas configurações, dados, mundos ou pacotes.
+
+- **Código e laboratório:** [`torre-do-caos/`](torre-do-caos/README.md).
+- **Status de execução:** [F0/F1.1](torre-do-caos/docs/STATUS-F0-F1.md) — fundação Java/SQLite, gameplay desativado.
+- **CI separada:** [workflow Torre do Caos](.github/workflows/torre-do-caos-ci.yml), acionado somente quando arquivos da Torre mudam.
+- **Segurança:** sem merge ou deploy na Shulkerboxes até homologação e decisão expressa do PO.

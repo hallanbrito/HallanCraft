@@ -1,0 +1,63 @@
+name: Torre do Caos | Java CI
+on:
+  pull_request:
+    paths:
+      - 'torre-do-caos/**'
+      - '.github/workflows/torre-do-caos-ci.yml'
+  push:
+    branches:
+      - 'feat/torre-do-caos-f0-f1'
+    paths:
+      - 'torre-do-caos/**'
+      - '.github/workflows/torre-do-caos-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: torre-do-caos
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.14.3'
+      - name: Testar e compilar JAR
+        run: gradle clean test jar --no-daemon
+      - name: Preparar pacote para upload manual na Shulkerboxes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          JAR="$(find build/libs -maxdepth 1 -type f -name 'TorreDoCaos-*.jar' | head -n 1)"
+          test -n "$JAR" && test -f "$JAR"
+          jar tf "$JAR" | grep -qx 'plugin.yml'
+          jar tf "$JAR" | grep -qx 'br/com/hallancraft/torredocaos/TorreDoCaosPlugin.class'
+          cp "$JAR" dist/TorreDoCaos-Paper-1.21.4-F1.2.jar
+          (
+            cd dist
+            sha256sum TorreDoCaos-Paper-1.21.4-F1.2.jar > SHA256.txt
+          )
+          {
+            echo 'TORRE DO CAOS - F1.2 (PROTOTIPO, NAO E JOGO JOGAVEL)'
+            echo 'Servidor Paper separado, versao 1.21.4 / Java 21.'
+            echo 'Instalacao manual: painel Shulkerboxes > Version / plugins > Upload plugin (.jar).'
+            echo 'Nao enviar este ZIP como mundo; extraia o JAR antes do upload.'
+            echo 'Sem waves, loot, barricadas, reset de arena ou multiplayer nesta fase.'
+            echo 'Nenhum deploy automatico. Nunca instalar no servidor familiar do Jose.'
+            echo 'Documentacao: https://github.com/hallanbrito/HallanCraft/blob/feat/torre-do-caos-f0-f1/torre-do-caos/docs/SHULKERBOXES.md'
+          } > dist/LEIA-ME.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TorreDoCaos-Paper-1.21.4-F1.2
+          path: torre-do-caos/dist/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,5 +1,13 @@
-# Pré-configuração: nenhuma arena/wave está habilitada nesta etapa.
+# Gameplay is not implemented: F1.2 provides blueprint administration only.
 enabled-gameplay: false
 reset-blocks-per-tick: 40
 reconnect-grace-seconds: 30
 max-active-mobs: 12
+
+# Configure after constructing an arena in a disposable Paper world.
+# arenas:
+#   arena-1:
+#     world: world
+#     min: {x: 100, y: 60, z: 100}
+#     max: {x: 129, y: 74, z: 129}
+arenas: {}

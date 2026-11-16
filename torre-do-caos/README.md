@@ -55,3 +55,10 @@ Essas verificações não substituem `gradlew test`, Paper real ou testes de fal
 ## Documentos
 
 Veja `docs/STATUS-F0-F1.md` e `docs/PLANO-EXECUCAO.md`.
+
+## F1.2 — Blueprint de Arena (experimental)
+
+A Torre tem agora um exportador/verificador de arenas, sem gameplay. Configure `arenas`
+em `config.yml` e use os comandos administrativos a partir do console.
+Detalhes e restrições em [F1-2-BLUEPRINT.md](docs/F1-2-BLUEPRINT.md).
+A implementação da construção de barricadas e do reset seguro será F1.3/F1.4.

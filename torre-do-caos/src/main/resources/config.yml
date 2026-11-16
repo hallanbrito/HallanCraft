@@ -1,0 +1,5 @@
+# Pré-configuração: nenhuma arena/wave está habilitada nesta etapa.
+enabled-gameplay: false
+reset-blocks-per-tick: 40
+reconnect-grace-seconds: 30
+max-active-mobs: 12

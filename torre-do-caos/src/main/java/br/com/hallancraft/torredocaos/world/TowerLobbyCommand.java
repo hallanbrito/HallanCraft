@@ -15,8 +15,13 @@ public final class TowerLobbyCommand implements CommandExecutor {
         this.admin = admin;
     }
     @Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length > 0 && "admin".equalsIgnoreCase(args[0]))
+        if (args.length > 0 && "admin".equalsIgnoreCase(args[0])) {
+            if (!worlds.isReady()) {
+                sender.sendMessage("Mundos em preparacao; admin de blueprints temporariamente bloqueado.");
+                return true;
+            }
             return admin.onCommand(sender, command, label, args);
+        }
         if (!(sender instanceof Player player)) {
             sender.sendMessage("Uso no jogo: /torre jogar, /torre lobby, /torre status. Admin: /torre admin ...");
             return true;

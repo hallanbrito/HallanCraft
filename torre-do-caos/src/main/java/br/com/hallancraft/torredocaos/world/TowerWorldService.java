@@ -161,6 +161,7 @@ public final class TowerWorldService {
 
         if (READY.equals(props.getProperty(STATUS))) {
             verifyBlueprints();
+            verifyCriticalWorldBlocks();
             lobbyReady = true;
             ready = true;
             plugin.getLogger().info("3 managed void worlds + 12 preserved towers loaded (no rebuild).");
@@ -228,6 +229,8 @@ public final class TowerWorldService {
                     }
                     if (towerIndex == TowerTopology.slots().size()) {
                         verifyBlueprints();
+                        for (World world : worlds.values()) world.save(true);
+                        verifyCriticalWorldBlocks();
                         props.setProperty(STATUS, READY);
                         writeMarker(props);
                         ready = true;
@@ -294,6 +297,19 @@ public final class TowerWorldService {
                 for (int x = slot.minX(); x <= slot.maxX(); x++)
                     if (!blueprint.blockData().get(i++).equals(world.getBlockAt(x, y, z).getBlockData().getAsString()))
                         throw new IOException("Changed tower structure in " + slot.id() + "; refusal to overwrite");
+    }
+
+    private void verifyCriticalWorldBlocks() throws IOException {
+        World lobby = worlds.get(TowerTopology.Realm.OVERWORLD);
+        if (lobby.getBlockAt(0, TowerTopology.LOBBY_Y, 0).getType() != Material.SMOOTH_STONE)
+            throw new IOException("Lobby platform missing after reload");
+        for (TowerTopology.Slot slot : TowerTopology.slots()) {
+            World world = worlds.get(slot.realm());
+            Material expected = towerMaterial(slot, TowerTopology.ARENA_RADIUS, 0,
+                TowerTopology.ARENA_RADIUS, TowerTopology.ARENA_RADIUS * 2 + 1);
+            if (world.getBlockAt(slot.centerX(), TowerTopology.ARENA_FLOOR_Y, slot.centerZ()).getType() != expected)
+                throw new IOException("Tower floor missing: " + slot.id());
+        }
     }
 
     private void verifyBlueprints() throws IOException {

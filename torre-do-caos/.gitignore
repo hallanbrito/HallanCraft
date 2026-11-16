@@ -1,0 +1,10 @@
+.gradle/
+build/
+server-local/
+*.db
+*.db-wal
+*.db-shm
+*.log
+.idea/
+.vscode/
+.DS_Store
